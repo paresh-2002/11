@@ -16,7 +16,7 @@ const EmployeeForm = () => {
       if (!id) return;
       setIsNew(false);
       const response = await fetch(
-        `http://localhost:8080/record/${params.id.toString()}`
+        `http://localhost:8080/employeeRecords/${params.id.toString()}`
       );
       if (!response.ok) {
         const message = `An error has occurred: ${response.statusText}`;
@@ -33,12 +33,12 @@ const EmployeeForm = () => {
     }
     fetchData();
     return;
-  }, [params.id, navigate]);
+  }, [params.id, isNew, navigate]);
   const onSubmit = async (e) => {
     e.preventDefault();
     const person = {...form}
     try {
-      const response = await fetch(`http://localhost:8080/record/${params.id ? "/" + params.id : ""}`,{
+      const response = await fetch(`http://localhost:8080/employeeRecords/${params.id ? "/" + params.id : ""} `,{
         method:`${params.id ? "PATCH" : "POST"}`,
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(person)
