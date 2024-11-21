@@ -50,7 +50,7 @@ const JWT_SECRET =
           expiresIn: "15m",
         });
         if (res.status(201)) {
-          return res.json({ status: "ok", data: token });
+          return res.json({ status: "ok", data: token, role });
         } else {
           return res.json({ error: "error" });
         }

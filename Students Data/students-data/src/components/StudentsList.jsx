@@ -3,7 +3,6 @@ import StudentList from "./StudentList";
 
 const StudentsList = () => {
   const [sData, setSData] = useState([]);
-  console.log(sData);
   useEffect(() => {
     async function getRecords() {
       const response = await fetch(`http://localhost:5000/students/`);
