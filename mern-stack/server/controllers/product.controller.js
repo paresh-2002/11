@@ -1,9 +1,22 @@
+import mongoose from "mongoose";
+import { ProductModel } from "../models/product.model.js";
 export const getProducts = async (req, res) => {
   try {
     const products = await ProductModel.find({});
-    res.status().json({ success: true, data: products });
+    res.status(200).json({ success: true, data: products });
   } catch (error) {
     console.log("Error in fetching products", error.message);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+export const getProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await ProductModel.findById(id);
+    res.status(200).json({ success: true, data: product });
+  } catch (error) {
+    console.log("Error in fetching product", error.message);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
@@ -23,9 +36,8 @@ export const createProduct = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Product saved successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ success: false, message: "Create new Product failed" });
+    res;
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };
 
@@ -47,11 +59,14 @@ export const updateProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(404).json({ success: false, message: "Invalid Product Id" });
+  }
   try {
     await ProductModel.findByIdAndDelete(id);
     res.status(200).json({ success: true, message: "Product Delete" });
   } catch (error) {
     console.log("Error in delete products", error.message);
-    res.status(400).json({ success: false, message: "Product Delete Error" });
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };

@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
-import EmployeeForm from './components/EmployeeForm';
-import RecordList from './components/EmployeeRecord';
+import ProductsList from './components/ProductsList';
+import AddProduct from './components/AddProduct';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <RecordList />,
+        element: <ProductsList />,
       },
     ],
   },
@@ -25,17 +25,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/edit/:id",
-        element: <EmployeeForm />,
+        element: <AddProduct />,
       },
     ],
   },
   {
-    path: "/create",
+    path: "/create-product",
     element: <App />,
     children: [
       {
-        path: "/create",
-        element: <EmployeeForm />,
+        path: "/create-product",
+        element: <AddProduct />,
       },
     ],
   },

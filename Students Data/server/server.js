@@ -12,7 +12,7 @@ app.use('/', users)
 
 
 const connectMongoDB = async () => {
-  const url = process.env.MONGO_URL || 'mongodb+srv://pareshay99099:XdaSLK8F2TuIFwy3@apicreate.on37h.mongodb.net/'
+  const url = process.env.MONGO_URL || 'mongodb+srv://pareshay99099:LPd5lf4cgVPdgaNC@apicreate.on37h.mongodb.net/'
   try {
     await mongoose.connect(url);
     console.log("Successfully connected to the MongoDB database");
